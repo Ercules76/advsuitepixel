@@ -36,6 +36,8 @@ class Pixel {
       md:           () => Browser.isMobile(), // is a mobile device?
       ua:           () => Browser.userAgent(), // user agent
       tz:           () => (new Date()).getTimezoneOffset(), // timezone
+      tid:          () => Cookie.getTransactionId(), // transaction Id
+      ct:           () => Config.conversionType, // conversion type
       utm_source:   key => Cookie.getUtm(key), // get the utm source
       utm_medium:   key => Cookie.getUtm(key), // get the utm medium
       utm_term:     key => Cookie.getUtm(key), // get the utm term

@@ -59,4 +59,23 @@ class Cookie {
       return name in utms ? utms[name] : '';
     }
   }
+
+  static setTransactionId() {
+    var exists = false;
+
+    if (Helper.isPresent(Url.getParameterByName('transaction_id'))) {
+      exists = true;
+    }
+
+    if (exists) {
+      var val = Url.getParameterByName('transaction_id');
+      this.set('tid', val, 30*24*60);
+    }
+  }
+
+  static getTransactionId() {
+    if (this.exists('tid')) {
+      return this.get('tid');
+    }
+  }
 }

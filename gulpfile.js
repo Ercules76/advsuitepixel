@@ -1,19 +1,19 @@
 // ---------- Configurations for your custom build of open pixel ---------- //
 
 // This is the header comment that will be included at the top of the "dist/openpixel.js" file
-var HEADER_COMMENT     = process.env.OPIX_HEADER_COMMENT || '// Open Pixel v1.3.0 | Published By Dockwa | Created By Stuart Yamartino | MIT License\n';
+var HEADER_COMMENT     = process.env.OPIX_HEADER_COMMENT || '// ADVSuite Pixel v1.3.0 | Published By ADVSuite | Created By Pinti Vittorio | MIT License\n';
 
 // This is where the compiled snippet and openpixel.js files will be dropped
 var DESTINATION_FOLDER = process.env.OPIX_DESTINATION_FOLDER || './dist';
 
 // The name of the global function and the cookie prefix that will be included in the snippet and is the client to fire off custom events
-var PIXEL_FUNC_NAME    = process.env.OPIX_PIXEL_FUNC_NAME || 'opix';
+var PIXEL_FUNC_NAME    = process.env.OPIX_PIXEL_FUNC_NAME || 'asx';
 
 // The remote URL of the pixel.gif file that will be pinged by the browser to send tracking information
-var PIXEL_ENDPOINT     = process.env.OPIX_PIXEL_ENDPOINT || '/pixel.gif';
+var PIXEL_ENDPOINT     = process.env.OPIX_PIXEL_ENDPOINT || 'https://back.vittoriopintidigital.com/as_pixel.gif';
 
 // The core openpixel.min.js file that the snippet will loaded asynchronously into the browser
-var JS_ENDPOINT        = process.env.OPIX_JS_ENDPOINT || '/openpixel.js';
+var JS_ENDPOINT        = process.env.OPIX_JS_ENDPOINT || 'https://back.vittoriopintidigital.com/advsuitepixel.min.js';
 
 // The current version of your openpixel configuration
 var VERSION            = process.env.OPIX_VERSION || '1';
@@ -41,7 +41,7 @@ function openpixel() {
     './src/pixel.js',
     './src/setup.js',
   ])
-  .pipe(concat('openpixel.js'))
+  .pipe(concat('advsuitepixel.js'))
   .pipe(babel())
   .pipe(iife({
     useStrict: false,
@@ -65,9 +65,13 @@ function snippet() {
   .pipe(inject.replace('JS_URL', JS_ENDPOINT))
   .pipe(inject.replace('OPIX_FUNC', PIXEL_FUNC_NAME))
   // This will minify and rename to snippet.html
-  .pipe(uglify())
-  .pipe(inject.prepend('<!-- Start Open Pixel Snippet -->\n<script>\n'))
-  .pipe(inject.append('\n</script>\n<!-- End Open Pixel Snippet -->'))
+  .pipe(uglify({
+    mangle: {
+      reserved: ['a', 'd', 'v', 's', 'u', 'i', 't', 'e']
+    }
+  }))
+  .pipe(inject.prepend('<!-- Start ADVSuite Pixel Snippet -->\n<script>\n'))
+  .pipe(inject.append('\n</script>\n<!-- End ADVSuite Pixel Snippet -->'))
   .pipe(rename({ extname: '.html' }))
   .pipe(gulp.dest(DESTINATION_FOLDER));
 }

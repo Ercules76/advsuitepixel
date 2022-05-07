@@ -2,6 +2,8 @@
 Cookie.exists('uid') ? Cookie.set('uid', Cookie.get('uid'), 2*365*24*60) : Cookie.set('uid', Helper.guid(), 2*365*24*60);
 // save any utms through as session cookies
 Cookie.setUtms();
+// set the transaction id if exists
+Cookie.setTransactionId();
 
 // process the queue and future incoming commands
 pixelFunc.process = function(method, value, optional) {

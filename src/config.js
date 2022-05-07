@@ -1,5 +1,6 @@
 var Config = {
   id: '',
   params: {},
-  version: versionNumber
+  version: versionNumber,
+  conversionType: 'sk'
 }
