@@ -1,22 +1,22 @@
 // ---------- Configurations for your custom build of open pixel ---------- //
 
-// This is the header comment that will be included at the top of the "dist/openpixel.js" file
-var HEADER_COMMENT     = process.env.OPIX_HEADER_COMMENT || '// ADVSuite Pixel v1.3.0 | Published By ADVSuite | Created By Pinti Vittorio | MIT License\n';
+// This is the header comment that will be included at the top of the "dist/advsuitepixel.js" file
+var HEADER_COMMENT     = process.env.ASX_HEADER_COMMENT || '// ADVSuite Pixel v1.0.0 | Published By ADVSuite | Created By Pinti Vittorio | MIT License\n';
 
 // This is where the compiled snippet and openpixel.js files will be dropped
-var DESTINATION_FOLDER = process.env.OPIX_DESTINATION_FOLDER || './dist';
+var DESTINATION_FOLDER = process.env.ASX_DESTINATION_FOLDER || './dist';
 
 // The name of the global function and the cookie prefix that will be included in the snippet and is the client to fire off custom events
-var PIXEL_FUNC_NAME    = process.env.OPIX_PIXEL_FUNC_NAME || 'asx';
+var PIXEL_FUNC_NAME    = process.env.ASX_PIXEL_FUNC_NAME || 'asx';
 
 // The remote URL of the pixel.gif file that will be pinged by the browser to send tracking information
-var PIXEL_ENDPOINT     = process.env.OPIX_PIXEL_ENDPOINT || 'https://asapi.advsuite.net/as_pixel.gif';
+var PIXEL_ENDPOINT     = process.env.ASX_PIXEL_ENDPOINT || 'https://asapi.advsuite.net/as_pixel.gif';
 
 // The core openpixel.min.js file that the snippet will loaded asynchronously into the browser
-var JS_ENDPOINT        = process.env.OPIX_JS_ENDPOINT || 'https://asapi.advsuite.net/advsuitepixel.min.js';
+var JS_ENDPOINT        = process.env.ASX_JS_ENDPOINT || 'https://asapi.advsuite.net/advsuitepixel.min.js';
 
 // The current version of your openpixel configuration
-var VERSION            = process.env.OPIX_VERSION || '1';
+var VERSION            = process.env.ASX_VERSION || '1';
 
 // ------------------------------------------------------------------------//
 
@@ -49,7 +49,7 @@ function openpixel() {
     args: ['window', 'document', 'window["'+PIXEL_FUNC_NAME+'"]', '"'+PIXEL_FUNC_NAME+'"', '"'+PIXEL_ENDPOINT+'"', VERSION]
   }))
   .pipe(inject.prepend(HEADER_COMMENT))
-  .pipe(inject.replace('OPIX_FUNC', PIXEL_FUNC_NAME))
+  .pipe(inject.replace('ASX_FUNC', PIXEL_FUNC_NAME))
   // This will output the non-minified version
   .pipe(gulp.dest(DESTINATION_FOLDER))
   // This will minify and rename to openpixel.min.js
@@ -63,7 +63,7 @@ function openpixel() {
 function snippet() {
   return gulp.src('./src/snippet.js')
   .pipe(inject.replace('JS_URL', JS_ENDPOINT))
-  .pipe(inject.replace('OPIX_FUNC', PIXEL_FUNC_NAME))
+  .pipe(inject.replace('ASX_FUNC', PIXEL_FUNC_NAME))
   // This will minify and rename to snippet.html
   .pipe(uglify({
     mangle: {

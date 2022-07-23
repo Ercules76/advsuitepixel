@@ -57,12 +57,12 @@ window.onload = function() {
     }.bind(aTags[i]));
   }
 
-  var dataAttributes = document.querySelectorAll('[data-OPIX_FUNC-event]')
+  var dataAttributes = document.querySelectorAll('[data-ASX_FUNC-event]')
   for (var i = 0, l = dataAttributes.length; i < l; i++) {
     dataAttributes[i].addEventListener('click', function(_e) {
-      var event = this.getAttribute('data-OPIX_FUNC-event');
+      var event = this.getAttribute('data-ASX_FUNC-event');
       if (event) {
-        new Pixel(event, Helper.now(), this.getAttribute('data-OPIX_FUNC-data'));
+        new Pixel(event, Helper.now(), this.getAttribute('data-ASX_FUNC-data'));
       }
     }.bind(dataAttributes[i]));
   }

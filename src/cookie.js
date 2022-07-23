@@ -63,12 +63,12 @@ class Cookie {
   static setTransactionId() {
     var exists = false;
 
-    if (Helper.isPresent(Url.getParameterByName('transaction_id'))) {
+    if (Helper.isPresent(Url.getParameterByName('as_tid'))) {
       exists = true;
     }
 
     if (exists) {
-      var val = Url.getParameterByName('transaction_id');
+      var val = Url.getParameterByName('as_tid');
       this.set('tid', val, 30*24*60);
     }
   }
