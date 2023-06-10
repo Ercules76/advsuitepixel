@@ -4,6 +4,7 @@ class Pixel {
     this.event = event;
     this.timestamp = timestamp;
     this.optional = Helper.optionalData(optional);
+    this.order_id = Helper.optionalData(optional.order_id);
     this.buildParams();
     this.send();
   }
@@ -38,6 +39,7 @@ class Pixel {
       tz:                   () => (new Date()).getTimezoneOffset(), // timezone
       tid:                  () => Cookie.getTransactionId(), // transaction Id
       ct:                   () => Config.conversionType, // conversion type
+      order_id:             () => this.order_id,
       utm_source:           key => Cookie.getUtm(key), // get the utm source
       utm_medium:           key => Cookie.getUtm(key), // get the utm medium
       utm_term:             key => Cookie.getUtm(key), // get the utm term
